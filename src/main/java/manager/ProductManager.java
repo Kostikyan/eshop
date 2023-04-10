@@ -1,7 +1,6 @@
 package manager;
 
 import db.DBConnectionProvider;
-import model.Category;
 import model.Product;
 
 import java.sql.*;
@@ -9,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductManager {
-    private Connection connection = DBConnectionProvider.getInstance().getConnection();
-    private CategoryManager cm = new CategoryManager();
+    private final Connection connection = DBConnectionProvider.getInstance().getConnection();
+    private final CategoryManager cm = new CategoryManager();
 
     public void save(Product product) {
         String sql = "insert into `eshop`.`product`(`name`, `description`, `price`, `quantity`, `category`) values (?, ?, ?, ?, ?)";
@@ -32,11 +31,9 @@ public class ProductManager {
     }
 
     public void update(Product product) {
-        String sql = "UPDATE `eshop`.`product` " +
-                "SET name = '%s', description = '%s', price = '%d', quantity = '%d', category = '%d'" +
-                "WHERE id = '%d'";
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate(String.format(sql, product.getName(),
+        String sql = "UPDATE `eshop`.`product` SET name = '%s', description = '%s', price = '%d', quantity = '%d', category = '%d' WHERE id = '%d'";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.executeUpdate(String.format(sql, product.getName(),
                     product.getDescription(), product.getPrice(),
                     product.getQuantity(), product.getCategory().getId(), product.getId()));
         } catch (SQLException e) {
@@ -56,6 +53,15 @@ public class ProductManager {
             throw new RuntimeException(e);
         }
         return products;
+    }
+
+    public void removeById(int id) {
+        String sql = "DELETE FROM `eshop`.`product` WHERE id = " + id;
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.executeUpdate(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Product getById(int id) {
@@ -81,14 +87,5 @@ public class ProductManager {
         int categoryId = resultSet.getInt("category");
         product.setCategory(cm.getById(categoryId));
         return product;
-    }
-
-    public void removeById(int id) {
-        String sql = "DELETE FROM `eshop`.`product` WHERE id = " + id;
-        try (PreparedStatement ps = connection.prepareStatement(sql)) {
-            ps.executeUpdate(sql);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

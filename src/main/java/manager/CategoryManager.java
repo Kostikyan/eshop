@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CategoryManager {
 
-    private static Connection connection = DBConnectionProvider.getInstance().getConnection();
+    private final Connection connection = DBConnectionProvider.getInstance().getConnection();
 
     public void save(Category category) {
         String sql = "insert into `eshop`.`category`(`name`) values (?)";
@@ -55,8 +55,8 @@ public class CategoryManager {
 
     public void update(Category category) {
         String sql = "UPDATE `eshop`.`category` SET name = '%s' WHERE id = '%d'";
-        try(Statement statement = connection.createStatement()){
-            statement.executeUpdate(String.format(sql, category.getName(),category.getId()));
+        try(PreparedStatement ps = connection.prepareStatement(sql)){
+            ps.executeUpdate(String.format(sql, category.getName(),category.getId()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

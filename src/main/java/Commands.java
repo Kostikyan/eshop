@@ -6,6 +6,10 @@ public interface Commands {
     String ADD_PRODUCT = "4";
     String EDIT_PRODUCT_BY_ID = "5";
     String DELETE_PRODUCT_BY_ID = "6";
+    String PRINT_SUM_OF_PRODUCTS = "7";
+    String PRINT_MAX_OF_PRICE_PRODUCT = "8";
+    String PRINT_MIN_OF_PRICE_PRODUCT = "9";
+    String PRINT_AVG_OF_PRICE_PRODUCT = "10";
 
     static void printCommands() {
         System.out.println("input: " + EXIT + " for exit");
@@ -15,5 +19,9 @@ public interface Commands {
         System.out.println("       " + ADD_PRODUCT + " for add product");
         System.out.println("       " + EDIT_PRODUCT_BY_ID + " for edit product by id");
         System.out.println("       " + DELETE_PRODUCT_BY_ID + " for delete product by id");
+        System.out.println("       " + PRINT_SUM_OF_PRODUCTS + " for print SUM of products");
+        System.out.println("       " + PRINT_MAX_OF_PRICE_PRODUCT + " for print MAX of price product");
+        System.out.println("       " + PRINT_MIN_OF_PRICE_PRODUCT + " for print MIN of price product");
+        System.out.println("       " + PRINT_AVG_OF_PRICE_PRODUCT + " for print AVG of price product");
     }
 }

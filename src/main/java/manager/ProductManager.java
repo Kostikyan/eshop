@@ -88,4 +88,56 @@ public class ProductManager {
         product.setCategory(cm.getById(categoryId));
         return product;
     }
+
+    public int printSumOfPriceProducts() {
+        String sql = "SELECT SUM(price) FROM `eshop`.`product`";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
+    public int printMaxOfPriceProduct() {
+        String sql = "SELECT MAX(price) FROM `eshop`.`product`";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
+    public int printMinOfPriceProduct() {
+        String sql = "SELECT MIN(price) FROM `eshop`.`product`";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
+
+    public double printAvgOfPriceProduct() {
+        String sql = "SELECT AVG(price) FROM `eshop`.`product`";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet resultSet = statement.executeQuery(sql);
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return 0;
+    }
 }

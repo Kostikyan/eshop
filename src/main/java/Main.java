@@ -27,14 +27,18 @@ public class Main implements Commands {
                 case ADD_PRODUCT -> addProduct();
                 case EDIT_PRODUCT_BY_ID -> editProductById();
                 case DELETE_PRODUCT_BY_ID -> deleteProductById();
+                case PRINT_SUM_OF_PRODUCTS -> System.out.println(PRODUCT_MANAGER.printSumOfPriceProducts());
+                case PRINT_MAX_OF_PRICE_PRODUCT -> System.out.println(PRODUCT_MANAGER.printMaxOfPriceProduct());
+                case PRINT_MIN_OF_PRICE_PRODUCT -> System.out.println(PRODUCT_MANAGER.printMinOfPriceProduct());
+                case PRINT_AVG_OF_PRICE_PRODUCT -> System.out.println(PRODUCT_MANAGER.printAvgOfPriceProduct());
+
 
                 default -> System.out.println("wrong command!");
             }
         }
     }
 
-
-    // ADD METHODS:
+    // ADD METHODS addProduct & addCategory:
     private static void addProduct() {
         List<Category> categories = CATEGORY_MANAGER.getAll();
         for (Category category : categories) {
@@ -70,7 +74,7 @@ public class Main implements Commands {
         CATEGORY_MANAGER.save(category);
     }
 
-    // DELETE METHODS:
+    // DELETE METHODS deleteCategoryById & deleteProductById:
     private static void deleteCategoryById() {
         List<Category> categories = CATEGORY_MANAGER.getAll();
         for (Category category : categories) {
@@ -105,7 +109,7 @@ public class Main implements Commands {
     }
 
 
-    // EDIT METHODS:
+    // EDIT METHODS editCategoryById & editProductById:
     private static void editCategoryById() {
         List<Category> categories = CATEGORY_MANAGER.getAll();
         for (Category category : categories) {

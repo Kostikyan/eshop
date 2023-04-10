@@ -27,6 +27,7 @@ public class Main implements Commands {
                 case ADD_PRODUCT -> addProduct();
                 case EDIT_PRODUCT_BY_ID -> editProductById();
                 case DELETE_PRODUCT_BY_ID -> deleteProductById();
+                    
                 case PRINT_SUM_OF_PRODUCTS -> System.out.println(PRODUCT_MANAGER.printSumOfPriceProducts());
                 case PRINT_MAX_OF_PRICE_PRODUCT -> System.out.println(PRODUCT_MANAGER.printMaxOfPriceProduct());
                 case PRINT_MIN_OF_PRICE_PRODUCT -> System.out.println(PRODUCT_MANAGER.printMinOfPriceProduct());
